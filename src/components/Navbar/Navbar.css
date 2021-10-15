@@ -1,0 +1,22 @@
+.navBarContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: auto;
+}
+
+.navItemContainer {
+  width: auto;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.navItemData {
+  font-size: 18px;
+}
