@@ -1,4 +1,4 @@
-.loginContainer {
+.signupContainer {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -7,11 +7,11 @@
   position: relative;
 }
 
-.loginBox {
+.signupBox {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 70%;
+  width: 70;
   height: 70%;
   max-width: 400px;
   max-height: 500px;
@@ -22,7 +22,7 @@
   align-items: center;
 }
 
-.loginButton {
+.signupButton {
   padding: 15px 30px;
   font-weight: bold;
   font-size: 18px;
@@ -32,17 +32,11 @@
   color: white;
 }
 
-.loginButton:hover {
+.signupButton:hover {
   cursor: pointer;
 }
 
-.loginButton:active {
+.signupButton:active {
   background-color: #c4498c;
   transform: translateY(4px);
-}
-
-@media only screen and (min-width: 700px) {
-  .loginContainer {
-    justify-content: center;
-  }
 }

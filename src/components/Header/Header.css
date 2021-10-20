@@ -1,0 +1,13 @@
+.headerContainer {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+}
+
+.headerData {
+  font-size: 28px;
+  font-weight: bold;
+}

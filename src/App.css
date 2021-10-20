@@ -1,6 +1,19 @@
 .App {
   height: 100vh;
   font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomParent {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.contentParent {
+  padding: 20px;
+  flex: 1;
 }
 
 .noselect {

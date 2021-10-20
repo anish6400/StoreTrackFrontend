@@ -1,24 +1,19 @@
 import React from "react";
 import "./InputField.css";
-import colors from "../../colors.js"
+import colors from "../../services/colors.js";
 
-function InputField(props) {
+function InputField({ placeholder, type, darkModeOn, onChange, value }) {
   return (
     <input
       className="inputFieldContainer"
-      placeholder={props.placeholder}
-      type={props.type}
-      style={
-        props.darkModeOn
-        ? {
-            backgroundColor: colors.dark.primaryBackground,
-            color: colors.dark.text
-          }
-        : {
-            backgroundColor: colors.light.primaryBackground,
-            color: colors.light.text
-          }
-      }
+      placeholder={placeholder}
+      type={type}
+      style={{
+        backgroundColor: colors.getPrimaryBackground(darkModeOn),
+        color: colors.getTextColor(darkModeOn),
+      }}
+      onChange={onChange}
+      value={value}
     ></input>
   );
 }

@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./Signup.css";
 import colors from "../../services/colors.js";
 import InputField from "../../components/InputField/InputField.js";
-import { userLogin } from "../../services/requests.js";
-import { useHistory } from "react-router-dom";
+import { userSignup } from "../../services/requests.js";
+import { useHistory } from "react-router";
 
-function Login({ darkModeOn, addUserToken }) {
+function Signup({ darkModeOn, addUserToken }) {
+  const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [requesting, setRequesting] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
-  function login() {
+  function signup() {
     setRequesting(true);
-    userLogin(email, password).then((res) => {
+    userSignup(fullname, email, password).then((res) => {
       if (res.data.error) {
         setError(res.data.error);
       } else {
@@ -23,6 +24,9 @@ function Login({ darkModeOn, addUserToken }) {
       setRequesting(false);
     });
   }
+  function handleNameChange(e) {
+    setFullname(e.target.value);
+  }
   function handleEmailChange(e) {
     setEmail(e.target.value);
   }
@@ -30,25 +34,32 @@ function Login({ darkModeOn, addUserToken }) {
     setPassword(e.target.value);
   }
   return (
-    <div className="loginContainer">
+    <div className="signupContainer">
       <div
-        className="loginBox"
+        className="signupBox"
         style={{ backgroundColor: colors.getSecondaryBackground(darkModeOn) }}
       >
         <span
           style={{ color: colors.getTextColor(darkModeOn), fontWeight: "bold" }}
         >
-          Login
+          Sign up
         </span>
         {requesting ? (
           <span style={{ color: colors.getAccentColor, fontSize: "16px" }}>
-            Trying to sign in...
+            Trying to sign up...
           </span>
         ) : error ? (
           <span style={{ color: colors.getWarningColor, fontSize: "16px" }}>
             {error}
           </span>
         ) : null}
+        <InputField
+          placeholder="Full name"
+          type="name"
+          darkModeOn={darkModeOn}
+          onChange={handleNameChange}
+          value={fullname}
+        />
         <InputField
           placeholder="Email ID"
           type="email"
@@ -64,28 +75,17 @@ function Login({ darkModeOn, addUserToken }) {
           value={password}
         />
         <button
-          className="loginButton"
+          className="signupButton"
           style={{ backgroundColor: colors.getAccentColor }}
-          onClick={login}
+          onClick={signup}
           disabled={requesting}
         >
-          LOGIN
+          SIGN UP
         </button>
-        <span
-          style={{
-            textDecoration: "underline",
-            color: "#6889FF",
-            fontSize: "16px",
-            cursor: "pointer",
-          }}
-          href="/signup"
-        >
-          Forgot your password?
-        </span>
         <span
           style={{ color: colors.getTextColor(darkModeOn), fontSize: "16px" }}
         >
-          Do not have an account?{" "}
+          Already have an account?{" "}
           <span
             style={{
               textDecoration: "underline",
@@ -93,10 +93,9 @@ function Login({ darkModeOn, addUserToken }) {
               fontSize: "16px",
               cursor: "pointer",
             }}
-            onClick={() => history.push("/signup")}
-            href="/signup"
+            onClick={() => history.push("/login")}
           >
-            Signup now.
+            Login
           </span>
         </span>
         {/* <span style={{ fontSize: "16px", color: colors.getPlaceholderColor }}>
@@ -107,4 +106,4 @@ function Login({ darkModeOn, addUserToken }) {
   );
 }
 
-export default Login;
+export default Signup;

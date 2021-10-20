@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import colors from "../../colors.js";
+import colors from "../../services/colors.js";
 import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Navbar({ userToken, darkModeOn, toggleDarkMode }) {
+function Navbar({ userToken, darkModeOn, toggleDarkMode, navbarOpened }) {
   const navItems = userToken
     ? []
     : [
@@ -12,28 +12,34 @@ function Navbar({ userToken, darkModeOn, toggleDarkMode }) {
           data: "Login",
           icon: null,
           onClick: null,
+          path: "/login",
         },
         {
           data: "Signup",
           icon: null,
           onClick: null,
+          path: "/signup",
         },
         {
           data: "Demo",
           icon: null,
           onClick: null,
+          path: null,
         },
         {
           data: "Dark Mode",
           icon: darkModeOn ? faToggleOn : faToggleOff,
           onClick: toggleDarkMode,
+          path: null,
         },
       ];
-  console.log(navItems);
   return (
     <div
       className="navBarContainer"
-      style={{ backgroundColor: colors.getSecondaryBackground(darkModeOn) }}
+      style={{
+        display: navbarOpened ? "flex" : "none",
+        backgroundColor: colors.getSecondaryBackground(darkModeOn),
+      }}
     >
       {navItems.map((itemData) => (
         <NavItem
@@ -78,11 +84,13 @@ function NavItem({ data, icon, onClick, darkModeOn }) {
       >
         {data}
       </span>
-      <FontAwesomeIcon
-        icon={icon}
-        color={colors.getTextColor(darkModeOn)}
-        size="lg"
-      />
+      {icon ? (
+        <FontAwesomeIcon
+          icon={icon}
+          color={colors.getTextColor(darkModeOn)}
+          size="lg"
+        />
+      ) : null}
     </div>
   );
 }
